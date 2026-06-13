@@ -35,30 +35,65 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="glow-orb glow-orb-purple w-[350px] h-[350px] bottom-0 right-1/4"></div>
 
     <!-- Navbar -->
-    <header class="sticky top-0 z-50 border-b border-[var(--color-border)] backdrop-blur-xl" style="background: var(--color-header-bg)">
-      <div class="container flex items-center justify-between py-4">
-        <a href="#home" class="flex items-center gap-2.5 text-lg font-bold text-[var(--color-text)] no-underline">
-          <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-mono text-sm">&lt;/&gt;</span>
-          <span>${profile.shortName}<span class="text-[var(--color-accent)]">.</span></span>
+    <header class="site-header sticky top-0 z-50">
+      <div class="nav-bar">
+        <a href="#home" class="nav-brand" aria-label="${profile.name} — Home">
+          <span class="nav-brand-mark">VB</span>
+          <span class="nav-brand-text">
+            <span class="nav-brand-name">${profile.shortName}</span>
+            <span class="nav-brand-role">Portfolio</span>
+          </span>
         </a>
-        <nav class="hidden items-center gap-8 md:flex">
-          ${navLinks.map((link) => `<a href="${link.href}" class="nav-link">${link.label}</a>`).join('')}
+
+        <nav class="nav-desktop" aria-label="Main navigation">
+          <ul class="nav-list">
+            ${navLinks
+              .map(
+                (link, i) =>
+                  `<li><a href="${link.href}" class="nav-link"><span class="nav-link-index">${String(i + 1).padStart(2, '0')}</span>${link.label}</a></li>`
+              )
+              .join('')}
+          </ul>
         </nav>
-        <div class="flex items-center gap-3">
-          <button type="button" class="icon-btn" data-theme-toggle data-theme-icon aria-label="Switch to light mode"></button>
-          <a href="#contact" class="btn-primary hidden text-sm md:inline-flex">Hire Me</a>
-          <button id="menu-toggle" class="icon-btn md:hidden" aria-label="Toggle menu">
-            <span class="flex flex-col gap-1">
-              <span class="block h-0.5 w-5 bg-current"></span>
-              <span class="block h-0.5 w-5 bg-current"></span>
+
+        <div class="nav-actions">
+          <button type="button" class="nav-icon-btn" data-theme-toggle data-theme-icon aria-label="Switch to light mode"></button>
+          <a href="#contact" class="nav-cta btn-primary">Let's Talk</a>
+          <button
+            type="button"
+            id="menu-toggle"
+            class="nav-menu-btn md:hidden"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span class="nav-menu-icon" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
             </span>
           </button>
         </div>
       </div>
-      <nav id="mobile-menu" class="flex-col gap-4 border-t border-[var(--color-border)] px-6 py-4 md:hidden">
-        ${navLinks.map((link) => `<a href="${link.href}" class="nav-link mobile-nav-link">${link.label}</a>`).join('')}
-        <a href="#contact" class="btn-primary text-sm justify-center mobile-nav-link">Hire Me</a>
-      </nav>
+
+      <div id="mobile-menu" class="nav-mobile-panel" aria-hidden="true">
+        <div class="nav-mobile-backdrop" data-mobile-close></div>
+        <nav class="nav-mobile-drawer" aria-label="Mobile navigation">
+          <p class="nav-mobile-label">Navigation</p>
+          <ul class="nav-mobile-list">
+            ${navLinks
+              .map(
+                (link, i) =>
+                  `<li><a href="${link.href}" class="nav-mobile-link mobile-nav-link"><span class="nav-link-index">${String(i + 1).padStart(2, '0')}</span>${link.label}</a></li>`
+              )
+              .join('')}
+          </ul>
+          <div class="nav-mobile-footer">
+            <a href="#contact" class="btn-primary w-full justify-center mobile-nav-link">Let's Talk</a>
+            <p class="nav-mobile-note">${profile.role}</p>
+          </div>
+        </nav>
+      </div>
     </header>
 
     <main>
@@ -249,9 +284,29 @@ initContactForm()
 const menuToggle = document.querySelector<HTMLButtonElement>('#menu-toggle')
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-menu')
 
-menuToggle?.addEventListener('click', () => mobileMenu?.classList.toggle('open'))
+function setMobileMenuOpen(open: boolean) {
+  mobileMenu?.classList.toggle('open', open)
+  document.body.classList.toggle('nav-open', open)
+  menuToggle?.classList.toggle('is-open', open)
+  menuToggle?.setAttribute('aria-expanded', String(open))
+  menuToggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu')
+  mobileMenu?.setAttribute('aria-hidden', String(!open))
+}
+
+menuToggle?.addEventListener('click', () => {
+  setMobileMenuOpen(!mobileMenu?.classList.contains('open'))
+})
+
+document.querySelectorAll('[data-mobile-close]').forEach((el) => {
+  el.addEventListener('click', () => setMobileMenuOpen(false))
+})
+
 document.querySelectorAll('.mobile-nav-link').forEach((link) => {
-  link.addEventListener('click', () => mobileMenu?.classList.remove('open'))
+  link.addEventListener('click', () => setMobileMenuOpen(false))
+})
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 768) setMobileMenuOpen(false)
 })
 
 // Active nav

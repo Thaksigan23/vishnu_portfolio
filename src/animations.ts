@@ -170,7 +170,7 @@ function initCursorGlow() {
 }
 
 function initHeaderScroll() {
-  const header = document.querySelector('header')
+  const header = document.querySelector('.site-header')
   if (!header) return
 
   let lastY = window.scrollY
