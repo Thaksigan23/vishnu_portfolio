@@ -752,6 +752,12 @@ body.nav-open {
   background: rgba(10, 102, 194, 0.1);
 }
 
+.social-icon.social-github:hover {
+  color: var(--color-text);
+  border-color: rgba(148, 163, 184, 0.45);
+  background: rgba(148, 163, 184, 0.12);
+}
+
 .social-icon.social-whatsapp:hover {
   color: #25d366;
   border-color: rgba(37, 211, 102, 0.45);
@@ -792,6 +798,10 @@ body.nav-open {
 
 .social-btn.social-linkedin {
   background: #0a66c2;
+}
+
+.social-btn.social-github {
+  background: #24292f;
 }
 
 .social-btn.social-whatsapp {

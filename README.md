@@ -89,7 +89,7 @@ The contact form uses [FormSubmit.co](https://formsubmit.co/). On first submit, 
 **Vishnutharan Bavachelvan**
 
 - LinkedIn: [vishnutharanbavachelvan](https://www.linkedin.com/in/vishnutharanbavachelvan-5419a02b3)
-- GitHub: [Thaksigan23](https://github.com/Thaksigan23)
+- GitHub: [vishnu-tharan](https://github.com/vishnu-tharan)
 
 ## License
 

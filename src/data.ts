@@ -9,7 +9,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/vishnutharanbavachelvan-5419a02b3',
   instagram: 'https://instagram.com/vishnutharan',
   whatsapp: '94771234567',
-  github: 'https://github.com/vishnutharan',
+  github: 'https://github.com/vishnu-tharan',
   email: 'vishnutharan.dev@email.com',
   available: true,
   about:
