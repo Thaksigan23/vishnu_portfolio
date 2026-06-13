@@ -221,7 +221,7 @@ export const journeyPhases = [
       {
         period: '2012 – 2017',
         title: 'Primary & Lower Secondary',
-        institution: 'Jaffna Central College',
+        institution: 'J/Uduppiddy American Mission College',
         level: 'school' as const,
         description:
           'Completed primary education with strong interest in mathematics and science. Participated in school IT club and annual science exhibitions.',
@@ -231,7 +231,7 @@ export const journeyPhases = [
       {
         period: '2018 – 2019',
         title: 'G.C.E. Ordinary Level (O/L)',
-        institution: 'Jaffna Central College',
+        institution: 'J/Uduppiddy American Mission College',
         level: 'school' as const,
         description:
           'Sat for O/L examinations in the Science stream with focus on Mathematics, Science, and English. Built early interest in computers and technology.',
@@ -241,7 +241,7 @@ export const journeyPhases = [
       {
         period: '2020 – 2022',
         title: 'G.C.E. Advanced Level (A/L)',
-        institution: 'Jaffna Central College',
+        institution: 'J/Uduppiddy American Mission College',
         level: 'school' as const,
         description:
           'Pursued A/L in Physical Science stream with Combined Mathematics, Physics, and Information & Communication Technology.',
